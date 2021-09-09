@@ -15,7 +15,7 @@ Ideally, this whole challenge should take a day to finish. Let us know if takes 
 
 Finally, if you have **ANY** questions, just email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community. You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. 
 
-# Frontend Challenge
+## Frontend Challenge
 
 To provide suggestions to users, Fig has to reconcile a string the user
 has typed with one of our declarative [completion specs](https://fig.io/docs/getting-started/first-completion-spec).
@@ -27,7 +27,7 @@ to the user.
 Your task is to build a web app that breaks down a string into tokens and
 uses a Fig completion spec to annotate these tokens with descriptive information.
 
-## Overview
+### Overview
 
 Your web app should do the following:
 
@@ -63,7 +63,7 @@ can assume the first token is the name of the completion spec to load.
   * It is up to you what information from the completion spec you include
       in the annotation, but a good starting point is the `description` field.
 
-### Example inputs
+#### Example inputs
 
 Your app should handle the following inputs:
 * `git push origin master --all`
@@ -90,9 +90,10 @@ stress or pressure if you don't get to handling these cases:
 * `echo hello world` (variadic arguments)
 * `git add index.js deploy.sh package.json` (variadic arguments)
 
-## Deliverables
+### Deliverables
 
-The final deliverable should be a zip file containing the following:
+The final deliverable for this part of the challenge should be a zip file
+containing the following:
 
 1. A Next.js or React app that implements the functionality detailed above.
 2. A **README.md**. Please discuss your design decisions, how you handled
@@ -120,7 +121,7 @@ If you are stuck on something, _please reach out_! We want to ensure this
 is a realistic assessment of your skills as a developer and in the real
 world we'd be available as your teammates if you were blocked or felt stuck.
 
-## Rubric
+### Rubric
 
 We will evalute your project based on:
 
