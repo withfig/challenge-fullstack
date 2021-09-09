@@ -1,64 +1,72 @@
 # Fullstack Typescript Challenge
 
-👋 Hey! We are glad you are excited about joining [Fig](https://fig.io). This fullstack challenge aims to assess your competency with frontend/backend typescript, database schemas, a bit of logic, and  
+👋 Hey! We are glad you are excited about joining [Fig](https://fig.io).
+This challenge aims to assess your competency in both frontend
+and backend tasks, which we've broken down into two challenges:
 
-The challenge is separated into two parts but should be submitted together:
+1. **Frontend challenge**: Build a web app similar to [Explain Shell](https://explainshell.com/explain?cmd=git+push+origin+master) with data from [Fig's completion specs](https://github.com/withfig/autocomplete)
+2. **Database schema design**: Design the schema for a database that can
+account for users, teams, and authentication.
 
-1. **Frontend challenge**: Build a web app similar to [Explain Shell](https://explainshell.com/explain?cmd=git+push+origin+master) but using the data from [Fig's completion specs](https://github.com/withfig/autocomplete)
-2. **Database schema design**: Design the schema for a database that can account for users, teams, authentication,  
+These should be submitted as two separate zip files, with the format
+specified in more detail below.
 
 Ideally, this whole challenge should take a day to finish. Let us know if takes more or less so we can recalibrate our expectations.
 
 Finally, if you have **ANY** questions, just email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community. You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. 
 
-
 # Frontend Challenge
-TODO (Sean to clean up + add more info)
 
-Your aim is to build a web app similar to [Explain Shell](https://explainshell.com/explain?cmd=git+push+origin+master), however, using the data from [Fig's completion specs](https://github.com/withfig/autocomplete) + your own style.
+To provide suggestions to users, Fig has to reconcile a string the user
+has typed with one of our declarative [completion specs](https://fig.io/docs/getting-started/first-completion-spec).
 
-### The app should have
-* input:
-  * a way for users to input a free text string
-  * a button to click to output the list of explanations (or other creative way to trigger event)
-* output:
-  * a list of all user input tokens
-  * an explanation and categorization of each token based on data from Fig's completion specs
+Fig's completion specs are very powerful though, and with just
+a completion spec and a string, we can do more than just offer suggestions
+to the user.
 
-### Data
-TODO You can get all of Fig's completion data from this skypack /endpoint: 
+Your task is to build a web app that breaks down a string into tokens and
+uses a Fig completion spec to annotate these tokens with descriptive information.
 
-### Fig's completion spec standard
-* You can read more about how Fig thinks about CLI tools here here: https://fig.io/docs/concepts/cli-skeleton
-* TODO - talk them through walking down the tree
+## Overview
 
+Your web app should do the following:
 
-### Parser Assumptions
-* You can safely split the input string on spaces and assume item in the array is a token
-* Items that are quoted should be treated as one token e.g. `echo "hello world"` -> `[echo, "hello world"]`
-* The first token will always be the name of a CLI tool
-* 
-* No bash parsing required e.g. you won't be expected to account for things like command substitution (`$()`), file redirectors `>`, `<`, etc 
-* Quotes will not be nested e.g. `echo "Alice's nested quotes"` is invalid
-* You ca
+1. Provide a way for a user to input a free text string
+2. Parse a string input by the user into a sequence of tokens. You can
+make the following assumptions about the user's input:
+  * In general, any amount of white space delimits a new token.
+  * Quoted text should be treated as single token e.g. `echo "hello world"` has only two tokens.
+  * The string will not contain nested quotes (e.g. `echo "hello \"world\""`).
+  * The string will be a basic bash command, you don't need to worry about
+      command substitution, file redirection, pipes, boolean operators, or
+      really any shell constructs besides single and double quoted strings.
+3. Load up the appropriate Fig completion spec based on user input. You
+can assume the first token is the name of the completion spec to load.
+  * Completion spec's are Fig's declarative schema for describing the
+    structure of a CLI tool. They are 
+      documented at great length [here](https://fig.io/docs/handbook/completion-spec-rules)
+      and [here](https://fig.io/docs/concepts/cli-skeleton)
+      and many examples can be found in our [repo of public specs](https://github.com/withfig/autocomplete/blob/master/dev/ls.ts)
+  * Specs can loaded in your app using [Skypack](https://www.skypack.dev/)
+      together with [dynamic imports](https://javascript.info/modules-dynamic-imports#the-import-expression)
+      (e.g.  `import("https://cdn.skypack.dev/@withfig/autocomplete/specs/ls.js")`
+      loads the `ls` spec from our public repo)
+4. Annotate each token with information from the completion spec.
+  * For simplicity you can assume any options or subcommands used in the
+      string will only contain _mandatory_ arguments: don't worry about handling 
+      [optional arguments](https://fig.io/docs/reference/arg#isoptional)
+  * Visualize the annotations in an appealing way. You can take
+      inspiration from [Explain
+      Shell](https://explainshell.com/explain?cmd=git+push+origin+master)
+      but please don't copy this exactly -- this is an opportunity to show
+      off your creativity.
+  * It is up to you what information from the completion spec you include
+      in the annotation, but a good starting point is the `description` field.
 
+### Example inputs
 
-
-### What we are looking for
-* A beautiful looking app (nice UX and UI)
-* Correctly working parser
-  * Correct explanation of each token 
-  * Accounts for all cases in **must support** section below and optionally the additional cases
-
-
-### Tools you should use
-* **Frontend**: preferably next.js, but you may also use react.js
-* State management: Up to you
-* Hosting: Up to you. We recommend vercel or netlify
-
-
-### Inputs you must support
-* `git push origin master --all`  
+Your app should handle the following inputs:
+* `git push origin master --all`
 * `ls -a -l -p`
 * `echo "hello world"`
 * `git commit -m "hello world"`
@@ -66,28 +74,59 @@ TODO You can get all of Fig's completion data from this skypack /endpoint:
 * `npm run dev`
 * `npm install -g react`
 
-**[Optional Level 1]**
+If you have time or want a challenge you can make sure the app handles the
+following, more difficult inputs. These are strictly optional, don't feel
+stress or pressure if you don't get to handling these cases:
+
+**Optional Level 1**
 
 * `git push origin --all` (the branch is not included as it is optional and `--all` is treated as an option)
 * `git push origin --this-is-a-branch --all` (the branch starts with a `--`)
 
-**[Optional Level 2]**
+**Optional Level 2**
 
 * `ls -alP` (chained options)
 * `git commit -mmsg` (chained options were one takes an argument)
 * `echo hello world` (variadic arguments)
 * `git add index.js deploy.sh package.json` (variadic arguments)
 
+## Deliverables
 
-### Final
-In your submission, please also include a readme answering the following questions:
-1. How long did this take you (split up by challenge)
-2. What are some common edge cases your parser does not account for? Do you have any ideas how you would account for them?
-3. What other ideas do you have for how to make this a more useful tool?
-4. If you had more time, what else would you have done?
-5. Anything else you think we should know?
+The final deliverable should be a zip file containing the following:
 
+1. A Next.js or React app that implements the functionality detailed above.
+2. A **README.md**. Please discuss your design decisions, how you handled
+  (or decided not to handle) various edge cases, any product ideas you have
+  to make this a more useful product, and what would you would do if you
+  had more time.
 
+The web app should be written in Typescript, besides that, you may use
+whatever packages and libraries you'd like to achieve the final result.
+
+We will run your project locally as follows:
+
+```bash
+unzip your_submission.zip
+cd your_submission
+npm ci
+npm run start
+```
+
+So you should include a `package.json` and `package-lock.json` but do not
+need to include `node_modules/` in the zip file. Please make sure your
+submission will run if we follow these steps.
+
+If you are stuck on something, _please reach out_! We want to ensure this
+is a realistic assessment of your skills as a developer and in the real
+world we'd be available as your teammates if you were blocked or felt stuck.
+
+## Rubric
+
+We will evalute your project based on:
+
+1. **Correctness:** How well does the implementation work? What edge cases were considered?
+2. **Code quality and design:** Does the app use modern paradigms for typescript and web app frameworks? Is the code easy to follow?
+3. **Research and documentation:** How well are engineering decisions justified? What options were explored?
 
 
 ### Database schema Challenge
@@ -103,9 +142,3 @@ Create a loom or a short video walking through your design and talking through a
 * Users can have multiple emails
 * Users can be associated with multiple teams
 * Teams can share scripts across teams
-
-
-
-
-
-
