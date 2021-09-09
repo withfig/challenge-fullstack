@@ -97,6 +97,8 @@ Want to make sure you can design database schemas that can cater to a growing ap
 
 Recommend using something like https://drawsql.app/ to make it visual
 
+Create a loom or a short video walking through your design and talking through any edge cases
+
 * Should have an 
 * Users can have multiple emails
 * Users can be associated with multiple teams
