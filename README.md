@@ -35,15 +35,14 @@ Your web app should do the following:
 a sequence of tokens delimited by white space. Quoted text should be
 treated as single token e.g. `echo "hello world"` has only two tokens.
 
-  You can make the following assumptions about the user input:
+    You can make the following assumptions about the user input:
 
-  - The string will not contain nested quotes (e.g. `echo "hello \"world\""`).
-  - The string will be a basic bash command, you don't need to worry about
+    - The string will not contain nested quotes (e.g. `echo "hello \"world\""`).
+    - The string will be a basic bash command, you don't need to worry about
       command substitution, file redirection, pipes, boolean operators, or
       really any shell constructs besides single and double quoted strings.
 
-  See the example inputs section below for specific cases you should
-  support.
+    See the example inputs section below for specific cases you should support.
 
 2. **Load up a completion spec** specified by the first token, using
 [Skypack](https://www.skypack.dev/) and [dynamic
@@ -52,20 +51,25 @@ imports](https://javascript.info/modules-dynamic-imports#the-import-expression)
 `import("https://cdn.skypack.dev/@withfig/autocomplete/specs/ls.js")` to
 load the `ls` spec from our public repo)
 
-  Completion spec's are Fig's declarative schema for describing the
-  structure of a CLI tool. They are documented at great length [here](https://fig.io/docs/handbook/completion-spec-rules) and [here](https://fig.io/docs/concepts/cli-skeleton) and many examples can be found in our [repo of public specs](https://github.com/withfig/autocomplete/blob/master/dev/ls.ts)
+    Completion spec's are Fig's declarative schema for describing the
+    structure of a CLI tool. They are documented at great length
+    [here](https://fig.io/docs/handbook/completion-spec-rules) and
+    [here](https://fig.io/docs/concepts/cli-skeleton) and many examples
+    can be found in our [repo of public
+    specs](https://github.com/withfig/autocomplete/blob/master/dev/ls.ts)
+
 3. **Annotate each token** with information from the completion spec and
 **visualize** the annotations in an appealing way.
 
-  You can take inspiration for visualization from [Explain
-  Shell](https://explainshell.com/explain?cmd=git+push+origin+master) but
-  please don't copy this exactly -- this is an opportunity to show off
-  your creativity. It is up to you what information from the completion spec you include
-  in the annotation, but a good starting point is the `description` field.
+    You can take inspiration for visualization from [Explain
+    Shell](https://explainshell.com/explain?cmd=git+push+origin+master) but
+    please don't copy this exactly -- this is an opportunity to show off
+    your creativity. It is up to you what information from the completion spec you include
+    in the annotation, but a good starting point is the `description` field.
 
-  For simplicity you can assume any options or subcommands used in the
-  string will only contain _mandatory_ arguments: don't worry about handling 
-  [optional arguments](https://fig.io/docs/reference/arg#isoptional)
+    For simplicity you can assume any options or subcommands used in the
+    string will only contain _mandatory_ arguments: don't worry about handling 
+    [optional arguments](https://fig.io/docs/reference/arg#isoptional)
 
 #### Example inputs
 
