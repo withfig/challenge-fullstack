@@ -138,16 +138,72 @@ We will evalute your project based on:
 3. **Research and documentation:** How well are engineering decisions justified? What options were explored?
 
 
-### Database schema Challenge
-TODO: Brendan to write up
 
-Want to make sure you can design database schemas that can cater to a growing application
+## Database Schema Challenge
 
-Recommend using something like https://drawsql.app/ to make it visual
+In this challenge, we want you to design a relational database schema (postgres recommended) as if you were building Fig's infrastructure from scratch. There are a list of constraints we want this schema to support outlined below. 
 
-Create a loom or a short video walking through your design and talking through any edge cases
+We would like you to submit a loom or a short, concise video walkthrough through your schema design + a little more in the video. We recommend using something like https://drawsql.app/ for the schema design but you could also walk through code in a .sql file.
 
-* Should have an 
-* Users can have multiple emails
-* Users can be associated with multiple teams
-* Teams can share scripts across teams
+
+### Constraints
+TODO (Brendan) still to complete
+Unless otherwise specified, assume values like "name" are not unique i.e. we recommend using unique IDs for foreign keys
+
+* User: represents a single, unique Fig user. Like GitHub, a Fig user will use the same account for personal and work. 
+    * Each user must have: at least one associated email (that is unique across all users), a unique username
+    * Each user can have: multiple associated emails, first name, last name, salted password, last login date
+* Organisation: 
+    * Must have: a unique name, multiple domains (each domain is unique across all organisations)
+* Teams
+    * Must have: at least one owner. 
+
+
+
+Organisation can have multiple domains associated with it
+Organisation can have multile teams associated with it
+an individual can host widgets personal to them
+an organisation can host widgets for everyone in the organisation
+a team can host widgets for everyone added to that team
+users can be owner/member of an org (default member)
+users can be owner/member of a team (default member)
+
+
+
+
+
+**Note**
+You don't necessarily have to use the organisation, team structure proposed above. If you can come up with a more elegant solution we are open to this. The general purpose of this challenge is to see how you could build the database for a GitHub like team management system.
+
+
+
+
+**Optional Level 1**
+* How could we allow users to sign into Fig using Google/GitHub/GitLab/Bitbucket etc OAuth
+    * No need to write the code, just create relevant tables/columns + talk through it
+
+
+**Optional Level 2**
+* Encryption: How could we store confidential data
+    * No need to write the code, just create relevant tables/columns + talk through it
+
+
+Fig can also host scripts with the same pattern as widgets
+
+In addition, explain how the auth should work
+
+
+
+### Deliverables
+1. A video walking through your database schema. Your schema should be designed visually using a tool like https://drawsql.app/ or can be a .sql file with the code to generate the schema
+
+3. [Optional, but bonus points] Talk through Optional Level 1 and or Level 2
+
+### Rubric
+
+We will evalute your submission based on:
+
+1. **Correctness:** Does the database schema satisy the specified constraints
+2. **Design:** Is the schema designed in a performant and scalable way?
+3. **Summary:** Is the summary video clear and concise
+
