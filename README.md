@@ -10,7 +10,7 @@ account for users, teams, and authentication.
 
 These should be submitted as two separate zip files to brendan, matt, and sean @fig.io. More information below
 
-Ideally, this whole challenge should take a day to finish. Let us know if takes more or less so we can recalibrate our expectations.
+This challenge shouldn't take longer than a day to finish, likely less. Let us know if takes more or less so we can recalibrate our expectations.
 
 Finally, if you have **ANY** questions, just email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community. You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. 
 
