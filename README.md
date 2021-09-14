@@ -8,8 +8,7 @@ and backend tasks, which we've broken down into two challenges:
 2. **Database schema design**: Design the schema for a database that can
 account for users, teams, and authentication.
 
-These should be submitted as two separate zip files, with the format
-specified in more detail below.
+These should be submitted as two separate zip files to brendan, matt, and sean @fig.io. More information below
 
 Ideally, this whole challenge should take a day to finish. Let us know if takes more or less so we can recalibrate our expectations.
 
@@ -133,9 +132,10 @@ world we'd be available as your teammates if you were blocked or felt stuck.
 
 We will evalute your project based on:
 
-1. **Correctness:** How well does the implementation work? What edge cases were considered?
+1. **Correctness:** How well does the implementation work? What edge cases were considered? Were there any bugs? 
 2. **Code quality and design:** Does the app use modern paradigms for typescript and web app frameworks? Is the code easy to follow?
 3. **Research and documentation:** How well are engineering decisions justified? What options were explored?
+4. **Product & UI**: Does this feel like a great product? Does it have unique and beautiful UX/UI? Is it simple and clear how to perform actions? If there are errors, are they handled gracefully?
 
 
 ### Database schema Challenge
