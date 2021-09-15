@@ -1,56 +1,40 @@
 # Fullstack Typescript Challenge
 
-👋 Hey! We are glad you are excited about joining [Fig](https://fig.io).
-This challenge aims to assess your competency in both frontend
-and backend tasks, which we've broken down into two challenges:
+👋  Hey! We are glad you are excited about joining [Fig](https://fig.io).
 
-1. **Frontend challenge**: Build a web app similar to [Explain Shell](https://explainshell.com/explain?cmd=git+push+origin+master) with data from [Fig's completion specs](https://github.com/withfig/autocomplete)
-2. **Database schema design**: Design the schema for a database that can
-account for users, teams, and authentication.
 
-These should be submitted as two separate zip files to brendan, matt, and sean @fig.io. More information below
+This challenge aims to assess your competency in both frontend and backend tasks.
 
-This challenge shouldn't take longer than a day to finish, likely less. Let us know if takes more or less so we can recalibrate our expectations.
+## The challenge
+Build a web app similar to [Explain Shell](https://explainshell.com/explain?cmd=git+push+origin+master) using data from [Fig's completion specs](https://github.com/withfig/autocomplete)
 
-Finally, if you have **ANY** questions, just email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community. You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. 
+This challenge asks you to build an app very similar to Fig's [autocomplete app](https://fig.io): It takes a string input, tokenizes it, reconciles it to one of our declarative [completion specs](https://fig.io/docs/getting-started/first-completion-spec), and renders an output. In this case of the autocomplete app, the output is a list of autocomplete suggestions. In the case of this challenge, the output should be a list of tokens (subcommands, options, arguments) with descriptive information for each.
 
-## Frontend Challenge
-
-To provide suggestions to users, Fig has to reconcile a string the user
-has typed with one of our declarative [completion specs](https://fig.io/docs/getting-started/first-completion-spec).
-
-Fig's completion specs are very powerful though, and with just
-a completion spec and a string, we can do more than just offer suggestions
-to the user.
-
-Your task is to build a web app that breaks down a string into tokens and
-uses a Fig completion spec to annotate these tokens with descriptive information.
-
-### Overview
+## Overview
 
 Your web app should do the following:
 
-1. **Parse a string**, input by the user through a free text input, into
-a sequence of tokens delimited by white space. Quoted text should be
+1. **Parse a string**: Allow the user to input free text. Split this free text into
+a sequence of tokens delimited by white space. _Note_: quoted text should be
 treated as single token e.g. `echo "hello world"` has only two tokens.
 
     You can make the following assumptions about the user input:
 
     - The string will not contain nested quotes (e.g. `echo "hello \"world\""`).
-    - The string will be a basic bash command, you don't need to worry about
-      command substitution, file redirection, pipes, boolean operators, or
+    - The string will be a basic bash command where the first token is the name of a CLI tool. 
+      You don't need to worry about command substitution, file redirection, pipes, boolean operators, or
       really any shell constructs besides single and double quoted strings.
 
-    See the example inputs section below for specific cases you should support.
+    See the example inputs section below for the specific cases you should support.
 
-2. **Load up a completion spec** specified by the first token, using
+2. **Load up a completion spec**: Load up the completion spec specified by the first token, using
 [Skypack](https://www.skypack.dev/) and [dynamic
 imports](https://javascript.info/modules-dynamic-imports#the-import-expression)
 (e.g.
 `import("https://cdn.skypack.dev/@withfig/autocomplete/specs/ls.js")` to
 load the `ls` spec from our public repo)
 
-    Completion spec's are Fig's declarative schema for describing the
+    Completion spec's are Fig's tree-like declarative schema for describing the
     structure of a CLI tool. They are documented at great length
     [here](https://fig.io/docs/handbook/completion-spec-rules) and
     [here](https://fig.io/docs/concepts/cli-skeleton) and many examples
@@ -70,6 +54,15 @@ load the `ls` spec from our public repo)
     string will only contain _mandatory_ arguments: don't worry about handling 
     [optional arguments](https://fig.io/docs/reference/arg#isoptional)
 
+    Finally, note that Fig's completion spec often don't have particularly good descriptions 
+    for arguments. 
+
+
+#### Languages and frameworks
+The web app should be written in **Next.js or React** and must use **Typescript**. Besides that, you
+may use whatever packages and libraries you'd like to achieve the final result.
+
+
 #### Example inputs
 
 Your app should handle the following inputs:
@@ -81,35 +74,18 @@ Your app should handle the following inputs:
 * `npm run dev`
 * `npm install -g react`
 
-If you have time or want a challenge you can make sure the app handles the
-following, more difficult inputs. These are strictly optional, don't feel
-stress or pressure if you don't get to handling these cases:
 
-**Optional Level 1**
+## Deliverables
 
-* `git push origin --all` (the branch is not included as it is optional and `--all` is treated as an option)
-* `git push origin --this-is-a-branch --all` (the branch starts with a `--`)
+When you're ready to submit, please email brendan, matt, sean @fig.io with 
+a zip file containing the following:
 
-**Optional Level 2**
-
-* `ls -alP` (chained options)
-* `git commit -mmsg` (chained options were one takes an argument)
-* `echo hello world` (variadic arguments)
-* `git add index.js deploy.sh package.json` (variadic arguments)
-
-### Deliverables
-
-The final deliverable for this part of the challenge should be a zip file
-containing the following:
-
-1. A Next.js or React app that implements the functionality detailed above.
+1. A Next.js or React app written in Typescript that implements the functionality detailed above.
 2. A **README.md**. Please discuss your design decisions, how you handled
   (or decided not to handle) various edge cases, any product ideas you have
   to make this a more useful product, and what would you would do if you
   had more time.
 
-The web app should be written in Typescript, besides that, you may use
-whatever packages and libraries you'd like to achieve the final result.
 
 We will run your project locally as follows:
 
@@ -124,30 +100,49 @@ So you should include a `package.json` and `package-lock.json` but do not
 need to include `node_modules/` in the zip file. Please make sure your
 submission will run if we follow these steps.
 
-If you are stuck on something, _please reach out_! We want to ensure this
-is a realistic assessment of your skills as a developer and in the real
-world we'd be available as your teammates if you were blocked or felt stuck.
 
-### Rubric
+## Evaluation Criteria
 
-We will evalute your project based on:
+We will evalute your project based on the following critera. Note, we are weighting **code quality & design** and **product** most heavily:
 
-1. **Correctness:** How well does the implementation work? What edge cases were considered? Were there any bugs? 
-2. **Code quality and design:** Does the app use modern paradigms for typescript and web app frameworks? Is the code easy to follow?
-3. **Research and documentation:** How well are engineering decisions justified? What options were explored?
-4. **Product & UI**: Does this feel like a great product? Does it have unique and beautiful UX/UI? Is it simple and clear how to perform actions? If there are errors, are they handled gracefully?
+1. ⭐️ **Code quality & design**
+    1. Does the app use modern paradigms for typescript and web app frameworks?
+    2. Is the code easy to follow? For instance, do you have good naming conventions, comments, component structure, folder hierarchy etc.
+    3. Do you have tests? Do these tests [assess behaviour rather than implementation](https://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html) 
+2. ⭐️ **Product**
+    1. Does you app look and feel polished?
+    2. Do you handle errors gracefully?
+3. **Correctness of parser**
+    1. Does it take the test inputs we gave and render the correct output for each token?
+    2. Does it handle incorrect inputs / edge cases?
+4. **Documentation:**
+    1. Does your readme describe and justify your thought process, code functionality, and design choices?
+    2. What other options were explored, if any?
 
 
-### Database schema Challenge
-TODO: Brendan to write up
+## Finally
+1. This challenge shouldn't take longer than a day to finish, likely less. Let us know if takes more or less so we can recalibrate our expectations.
 
-Want to make sure you can design database schemas that can cater to a growing application
+2. If you have **ANY** questions, _please reach out_ (email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community). You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. We want to make sure this
+is a realistic assessment of your skills as a developer. In the real world we'd be available as your teammates if you were blocked or felt stuck!
 
-Recommend using something like https://drawsql.app/ to make it visual
 
-Create a loom or a short video walking through your design and talking through any edge cases
+3. If you have time or want a challenge you can make sure the app handles the
+following, more difficult inputs. These are strictly optional. Do not feel
+stress or pressure if you don't get to handling these cases - we would much prefer you focus on product and code quality than this. However, if you're up for the challenge, here are some more examples:
 
-* Should have an 
-* Users can have multiple emails
-* Users can be associated with multiple teams
-* Teams can share scripts across teams
+* `git push origin --all` (the branch is not included as it is optional and `--all` is treated as an option)
+* `git push origin --this-is-a-branch --all` (the branch starts with a `--`)
+* `ls -alP` (chained options)
+* `git commit -mmsg` (chained options were one takes an argument)
+* `echo hello world abc def` (variadic arguments)
+* `git add index.js deploy.sh package.json` (variadic arguments)
+
+
+
+
+
+
+
+
+
