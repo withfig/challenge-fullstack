@@ -30,16 +30,20 @@ treated as single token e.g. `echo "hello world"` has only two tokens.
 2. **Load up a completion spec**: Load up the completion spec specified by the first token, using
 [Skypack](https://www.skypack.dev/) and [dynamic
 imports](https://javascript.info/modules-dynamic-imports#the-import-expression)
-(e.g.
-`import("https://cdn.skypack.dev/@withfig/autocomplete/specs/ls.js")` to
-load the `ls` spec from our public repo)
 
-    Completion spec's are Fig's tree-like declarative schema for describing the
+Completion specs are Fig's tree-like declarative schema for describing the
     structure of a CLI tool. They are documented at great length
     [here](https://fig.io/docs/handbook/completion-spec-rules) and
     [here](https://fig.io/docs/concepts/cli-skeleton) and many examples
     can be found in our [repo of public
     specs](https://github.com/withfig/autocomplete/blob/master/dev/ls.ts)
+
+The following shows how to dynamically load up the `ls` spec from our public repo:
+
+```javascript
+const url = "https://cdn.skypack.dev/@withfig/autocomplete/specs/ls.js"
+const git = await import(/* webpackIgnore: true */ url);
+```
 
 3. **Annotate each token** with information from the completion spec and
 **visualize** the annotations in an appealing way.
@@ -108,7 +112,7 @@ We will evalute your project based on the following critera. Note, we are weight
 1. ⭐️ **Code quality & design**
     1. Does the app use modern paradigms for typescript and web app frameworks?
     2. Is the code easy to follow? For instance, do you have good naming conventions, comments, component structure, folder hierarchy etc.
-    3. Do you have tests? Do these tests [assess behaviour rather than implementation](https://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html) 
+    3. Do you have tests? Do these tests assess behaviour rather than implementation([link 1](https://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html), [link2](https://teamgaslight.com/blog/testing-behavior-vs-testing-implementation)) 
 2. ⭐️ **Product**
     1. Does you app look and feel polished?
     2. Do you handle errors gracefully?
