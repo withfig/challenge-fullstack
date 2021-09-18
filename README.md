@@ -41,7 +41,7 @@ Completion specs are Fig's tree-like declarative schema for describing the
 The following shows how to dynamically load up the `ls` spec from our public repo:
 
 ```javascript
-const url = "https://cdn.skypack.dev/@withfig/autocomplete/specs/ls.js"
+const url = "https://cdn.skypack.dev/@withfig/autocomplete/build/ls.js"
 const git = await import(/* webpackIgnore: true */ url);
 ```
 
