@@ -3,8 +3,6 @@
 👋  Hey! We are glad you are excited about joining [Fig](https://fig.io).
 
 
-This challenge aims to assess your competency in both frontend and backend tasks.
-
 ## The challenge
 Build a web app similar to [Explain Shell](https://explainshell.com/explain?cmd=git+push+origin+master) using data from [Fig's completion specs](https://github.com/withfig/autocomplete)
 
