@@ -44,7 +44,7 @@ const git = await import(/* webpackIgnore: true */ url);
 ```
 
 3. **Annotate each token** with information from the completion spec and
-**visualize** the annotations in an appealing way.
+**visualize** the annotations in an appealing way that could ultimately be a live Fig product.
 
     You can take inspiration for visualization from [Explain
     Shell](https://explainshell.com/explain?cmd=git+push+origin+master) but
@@ -58,6 +58,7 @@ const git = await import(/* webpackIgnore: true */ url);
 
     Finally, note that Fig's completion spec often don't have particularly good descriptions 
     for arguments. 
+
 
 
 #### Languages and frameworks
@@ -75,7 +76,10 @@ Your app should handle the following inputs:
 * `git commit --message "hello world"`
 * `npm run dev`
 * `npm install -g react`
+* `echo hello world abc def` (variadic arguments)
+* `git add index.js deploy.sh package.json` (variadic arguments)
 
+__To be abundantly clear__, we expect you to correctly tokenize the input then annotate it with the correct description. This includes annotating arguments. e.g. you should provide an annotation for the `"hello world"` part of `echo "hello world"`.
 
 ## Deliverables
 
@@ -105,7 +109,7 @@ submission will run if we follow these steps.
 
 ## Evaluation Criteria
 
-We will evalute your project based on the following critera. Note, we are weighting **code quality & design** and **product** most heavily:
+We will evalute your project based on the following critera. Note, we are weighting **code quality & design** and **product** most heavily, however, we are still evaluating you on all criteria. ie you're not going to pass if you have a great product but no readme. 
 
 1. ⭐️ **Code quality & design**
     1. Does the app use modern paradigms for typescript and web app frameworks?
@@ -117,7 +121,7 @@ We will evalute your project based on the following critera. Note, we are weight
 3. **Correctness of parser**
     1. Does it take the test inputs we gave and render the correct output for each token?
     2. Does it handle incorrect inputs / edge cases?
-4. **Documentation:**
+4. **Documentation / README:**
     1. Does your readme describe and justify your thought process, code functionality, and design choices?
     2. What other options were explored, if any?
 
@@ -137,8 +141,7 @@ stress or pressure if you don't get to handling these cases - we would much pref
 * `git push origin --this-is-a-branch --all` (the branch starts with a `--`)
 * `ls -alP` (chained options)
 * `git commit -mmsg` (chained options were one takes an argument)
-* `echo hello world abc def` (variadic arguments)
-* `git add index.js deploy.sh package.json` (variadic arguments)
+
 
 
 
