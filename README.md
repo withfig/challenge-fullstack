@@ -22,6 +22,8 @@ treated as single token e.g. `echo "hello world"` has only two tokens.
     - The string will be a basic bash command where the first token is the name of a CLI tool. 
       You don't need to worry about command substitution, file redirection, pipes, boolean operators, or
       really any shell constructs besides single and double quoted strings.
+    - Assume that all arguments are mandatory. Arguments like `git push` take two 
+    [optional arguments](https://fig.io/docs/reference/arg#isoptional), but unless you are doing the challenge implementation of the parser at the bottom, just  disregard the `isOptional: true` and treat these arguments as mandatory.
 
     See the example inputs section below for the specific cases you should support.
 
@@ -51,10 +53,6 @@ const git = await import(/* webpackIgnore: true */ url);
     please don't copy this exactly -- this is an opportunity to show off
     your creativity. It is up to you what information from the completion spec you include
     in the annotation, but a good starting point is the `description` field.
-
-    For simplicity you can assume any options or subcommands used in the
-    string will only contain _mandatory_ arguments: don't worry about handling 
-    [optional arguments](https://fig.io/docs/reference/arg#isoptional)
 
     Finally, note that Fig's completion spec often don't have particularly good descriptions 
     for arguments. 
