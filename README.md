@@ -136,7 +136,7 @@ If you choose **Product**, we expect you to go above and beyond with your UX and
 
 **⭐️ Parser**
 
-If you choose **Parser**, we expect you to go above and beyond with your parser implementation. You likely should use an AST (or some other smart representation). You should account for the additional edge cases below and build your parser in such a way that it could account for future edge cases.
+If you choose **Parser**, we expect you to go above and beyond with your parser implementation. You likely should use an AST (or some other smart representation). You should at least account for the easier edge cases below, maybe some of the hard ones, and build your parser in such a way that it could account for future edge cases.
 * Easier edge cases
     * `echo hello world abc def` (variadic arguments)
     * `git add index.js deploy.sh package.json` (variadic arguments)
