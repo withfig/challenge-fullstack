@@ -74,15 +74,14 @@ Your app should handle the following inputs:
 * `git commit --message "hello world"`
 * `npm run dev`
 * `npm install -g react`
-* `echo hello world abc def` (variadic arguments)
-* `git add index.js deploy.sh package.json` (variadic arguments)
+
 
 __To be abundantly clear__, we expect you to correctly tokenize the input then annotate it with the correct description. This includes annotating arguments. e.g. you should provide an annotation for the `"hello world"` part of `echo "hello world"`.
 
+
 ## Deliverables
 
-When you're ready to submit, please email brendan, matt, sean @fig.io with 
-a zip file containing the following:
+When you're ready to submit, please create a zip file of the below and upload it to the following form: https://airtable.com/shrFwTaQFMqvzKYLX
 
 1. A Next.js or React app written in Typescript that implements the functionality detailed above.
 2. A **README.md**. Please discuss your design decisions, how you handled
@@ -107,38 +106,65 @@ submission will run if we follow these steps.
 
 ## Evaluation Criteria
 
-We will evalute your project based on the following critera. Note, we are weighting **code quality & design** and **product** most heavily, however, we are still evaluating you on all criteria. ie you're not going to pass if you have a great product but no readme. 
+PLEASE READ THIS SECTION AND THE FOCUS AREA SECTION CAREFULLY. EMAIL IF YOU HAVE QUESTIONS
 
-1. ⭐️ **Code quality & design**
+We will evalute your project based on all of the following critera. 
+
+1. **Code quality & design**
     1. Does the app use modern paradigms for typescript and web app frameworks?
     2. Is the code easy to follow? For instance, do you have good naming conventions, comments, component structure, folder hierarchy etc.
     3. Do you have tests? Do these tests assess behaviour rather than implementation([link 1](https://testing.googleblog.com/2013/08/testing-on-toilet-test-behavior-not.html), [link2](https://teamgaslight.com/blog/testing-behavior-vs-testing-implementation)) 
-2. ⭐️ **Product**
+2. **Product**
     1. Does you app look and feel polished?
     2. Do you handle errors gracefully?
-3. **Correctness of parser**
+3. **Parser**
     1. Does it take the test inputs we gave and render the correct output for each token?
     2. Does it handle incorrect inputs / edge cases?
 4. **Documentation / README:**
     1. Does your readme describe and justify your thought process, code functionality, and design choices?
     2. What other options were explored, if any?
 
+When evaluating, we will apply the most weight to the **code quality and design** and the section relevant to your chosen **focus area**. This means your code quality should be really good either way, you should still have a good readme, you should base line have a good product and parser, and then you should put more time and effort into your chosen focus (as outlined below).
+
+## Focus Area
+
+In order to show off your strengths, we would like you to pick a focus area in this challenge. The two focus areas are **Product** and **Parser**. When submitting, you will be asked which focus you chose so we can evaluate you accordingly.
+
+**⭐️ Product**
+
+If you choose **Product**, we expect you to go above and beyond with your UX and UI. You should do the minimum needed for the parser to work. Otherwise, the app should look and feel production ready. It should show your own flare.
+
+**⭐️ Parser**
+
+If you choose **Parser**, we expect you to go above and beyond with your parser implementation. You likely should use an AST (or some other smart representation). You should account for the additional edge cases below and build your parser in such a way that it could account for future edge cases.
+* Easier edge cases
+    * `echo hello world abc def` (variadic arguments)
+    * `git add index.js deploy.sh package.json` (variadic arguments)
+    * `git push origin --all` (the branch is not included as it is optional and `--all` is treated as an option)
+    * `git push origin --this-is-a-branch --all` (the branch starts with a `--`)
+    * `ls -alP` (chained options)
+    * `git commit ---message="hello world"` (argument to long option using equals
+* Harder edge cases
+    * `git commit -mmsg` (short option were one takes an argument)
+    * `git commit -ammsg` (chained options were one takes an argument)
+    * `git add index.js deploy.sh package.json --refresh` (variadic arguments that can be stopped by an option)
+    * `echo -n hello world -n` (variadic arguments that cannot be stopped by an option)
+    * `ls index.js -` (use a single dash `-` to use stdin instead of a file name - read more [here](https://unix.stackexchange.com/questions/16357/usage-of-dash-in-place-of-a-filename))
+    *  `grep -- -v file` (use a double dash `--` to indicate the end of options and the start of arguments - read more [here](https://unix.stackexchange.com/questions/11376/what-does-double-dash-mean))
+    * `git sfsfsf` (Invalid subcommand, option, or arg)
+
+You can see a bunch more examples here: http://docopt.org/
+
+
+**Why do we have focus areas?**
+
+Some programmers are fantastic at design. Some are fantastic at logic and traditional computer science. The best are talented at both. We would like you to play to your strengths.
 
 ## Finally
 1. This challenge shouldn't take longer than a day to finish, likely less. Let us know if takes more or less so we can recalibrate our expectations.
 
 2. If you have **ANY** questions, _please reach out_ (email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community). You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. We want to make sure this
 is a realistic assessment of your skills as a developer. In the real world we'd be available as your teammates if you were blocked or felt stuck!
-
-
-3. If you have time or want a challenge you can make sure the app handles the
-following, more difficult inputs. These are strictly optional. Do not feel
-stress or pressure if you don't get to handling these cases - we would much prefer you focus on product and code quality than this. However, if you're up for the challenge, here are some more examples:
-
-* `git push origin --all` (the branch is not included as it is optional and `--all` is treated as an option)
-* `git push origin --this-is-a-branch --all` (the branch starts with a `--`)
-* `ls -alP` (chained options)
-* `git commit -mmsg` (chained options were one takes an argument)
 
 
 
