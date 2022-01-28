@@ -36,7 +36,7 @@ Completion specs are Fig's tree-like declarative schema for describing the
     [here](https://fig.io/docs/handbook/completion-spec-rules) and
     [here](https://fig.io/docs/concepts/cli-skeleton) and many examples
     can be found in our [repo of public
-    specs](https://github.com/withfig/autocomplete/blob/master/dev/ls.ts)
+    specs](https://github.com/withfig/autocomplete/blob/master/src/ls.ts)
 
 The following shows how to dynamically load up the `ls` spec from our public repo:
 
@@ -163,7 +163,7 @@ Some programmers are fantastic at design. Some are fantastic at logic and tradit
 ## Finally
 1. This challenge shouldn't take longer than a day to finish, likely less. Let us know if takes more or less so we can recalibrate our expectations.
 
-2. If you have **ANY** questions, _please reach out_ (email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community). You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. We want to make sure this
+2. If you have **ANY** questions, _please reach out_ (email brendan, matt, and sean @fig.io. You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. We want to make sure this
 is a realistic assessment of your skills as a developer. In the real world we'd be available as your teammates if you were blocked or felt stuck!
 
 
