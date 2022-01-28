@@ -31,19 +31,58 @@ treated as single token e.g. `echo "hello world"` has only two tokens.
 [Skypack](https://www.skypack.dev/) and [dynamic
 imports](https://javascript.info/modules-dynamic-imports#the-import-expression)
 
-Completion specs are Fig's tree-like declarative schema for describing the
-    structure of a CLI tool. They are documented at great length
-    [here](https://fig.io/docs/handbook/completion-spec-rules) and
-    [here](https://fig.io/docs/concepts/cli-skeleton) and many examples
-    can be found in our [repo of public
-    specs](https://github.com/withfig/autocomplete/blob/master/src/ls.ts)
+    Completion specs are Fig's declarative schema for describing the
+    structure of a CLI tool. If you're interested, you can read ["CLI Skeleton"](https://fig.io/docs/concepts/cli-skeleton) for a high-level overview.
 
-The following shows how to dynamically load up the `ls` spec from our public repo:
+    The following shows how to dynamically load up the `ls` spec from our public repo:
+    
+    ```javascript
+    const url = "https://cdn.skypack.dev/@withfig/autocomplete/build/ls.js"
+    const ls = await import(/* webpackIgnore: true */ url);
+    ```
 
-```javascript
-const url = "https://cdn.skypack.dev/@withfig/autocomplete/build/ls.js"
-const git = await import(/* webpackIgnore: true */ url);
-```
+    We've included simplified type definitions to help you get started. Depending on your focus area, you may want to expand these types to make use of additional fields. More comprehensive documentation of _all_ the fields can be found [here](https://fig.io/docs/reference/subcommand).
+
+    ```typescript
+    export type Subcommand = {
+      name: string | string[];
+      description?: string;
+      subcommands?: Subcommand[];
+      options?: Option[];
+      args?: Arg | Arg[]
+    };
+    ```
+    All completion specs have a `Subcommand` object as the root node. 
+
+    ```typescript
+    export type Arg = {
+      name?: string;
+      description?: string;
+      
+      isOptional?: boolean;
+      isVariadic?: boolean;
+    };
+    ```
+
+    ```typescript
+    export type Option = {
+      name: string | string[];
+      description?: string;
+      args: Arg | Arg[];
+    };
+
+    ```
+
+    > **Hint**: if you are focusing on the Parser track, you may find it helpful to reuse (or reference) Fig's [autocomplete-types](https://github.com/withfig/autocomplete-tools/tree/main/packages/autocomplete-types). These can be installed by running `npm install @withfig/autocomplete-types` and updating `tsconfig.json` to include:
+    > ```
+    > {
+    >  "compilerOptions": {
+    >    // you may get some typecheck errors if you are using some node packages like "fs"
+    >    // just include "node" in the below array. Same for "jest", "chai"...and so on.
+    >    "types": ["@withfig/autocomplete-types"]
+    >  },
+    > }
+    > ```
 
 3. **Annotate each token** with information from the completion spec and
 **visualize** the annotations in an appealing way that could ultimately be a live Fig product.
@@ -76,7 +115,7 @@ Your app should handle the following inputs:
 * `npm install -g react`
 
 
-__To be abundantly clear__, we expect you to correctly tokenize the input then annotate it with the correct description. This includes annotating arguments. e.g. you should provide an annotation for the `"hello world"` part of `echo "hello world"`.
+__To be clear__, we expect you to correctly tokenize the input then annotate it with the correct description. This includes annotating arguments. e.g. you should provide an annotation for the `"hello world"` part of `echo "hello world"`.
 
 
 ## Deliverables
@@ -156,14 +195,10 @@ If you choose **Parser**, we expect you to go above and beyond with your parser 
 You can see a bunch more examples here: http://docopt.org/
 
 
-**Why do we have focus areas?**
-
-Some programmers are fantastic at design. Some are fantastic at logic and traditional computer science. The best are talented at both. We would like you to play to your strengths.
-
 ## Finally
 1. This challenge shouldn't take longer than a day to finish, likely less. Let us know if takes more or less so we can recalibrate our expectations.
 
-2. If you have **ANY** questions, _please reach out_ (email brendan, matt, and sean @fig.io. You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. We want to make sure this
+2. If you have **ANY** questions, _please reach out_ (email brendan, matt, or sean @fig.io OR message us in our [Discord](https://fig.io/community) community). You are not annoying us. We want you to succeed. You get no points for guessing. Best to clarify early if you are unsure of something. We want to make sure this
 is a realistic assessment of your skills as a developer. In the real world we'd be available as your teammates if you were blocked or felt stuck!
 
 
